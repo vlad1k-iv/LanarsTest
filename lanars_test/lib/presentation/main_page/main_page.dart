@@ -85,14 +85,9 @@ class _MainPageState extends State<MainPage> {
                     isReload: true,
                   );
             },
-            child: SizedBox(
-              height: context.screenHeight,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: AlphabetList(
-                  photos: state.photographersModel ?? [],
-                ),
-              ),
+            child: AlphabetList(
+              key: const ValueKey('alphabetList'),
+              photos: state.photographersModel ?? [],
             ),
           ),
         );
