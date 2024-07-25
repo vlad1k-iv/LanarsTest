@@ -1,4 +1,5 @@
 import 'package:lanars_test/data/responses/login_response.dart';
+import 'package:lanars_test/data/responses/photographer_response.dart';
 
 extension LoginMapper on Login? {
   Login toDomain() {
@@ -11,6 +12,18 @@ extension LoginMapper on Login? {
             page: 0,
             version: '',
           ),
+    );
+  }
+}
+
+extension PhotographerMapper on Photographer? {
+  Photographer toDomain() {
+    return Photographer(
+      page: this?.page ?? 0,
+      perPage: this?.perPage ?? 0,
+      photos: this?.photos ?? [],
+      totalResults: this?.totalResults ?? 0,
+      nextPage: this?.nextPage ?? '',
     );
   }
 }

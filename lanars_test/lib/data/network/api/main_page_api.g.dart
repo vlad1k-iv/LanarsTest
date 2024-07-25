@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api.dart';
+part of 'main_page_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _AppServiceClient implements AppServiceClient {
-  _AppServiceClient(
+class _MainPageAppServiceClient implements MainPageAppServiceClient {
+  _MainPageAppServiceClient(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://randomuser.me';
+    baseUrl ??= 'https://api.pexels.com';
   }
 
   final Dio _dio;
@@ -21,25 +21,29 @@ class _AppServiceClient implements AppServiceClient {
   String? baseUrl;
 
   @override
-  Future<Login> getUserFeedByGroup() async {
+  Future<Photographer> getListPhotographer(page) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'per_page': page};
+    final _headers = <String, dynamic>{
+      r'Authorization':
+          'Md7ffKqzamiOLHmnVGQko6PbxZwzvdVEOqot0zvavrt8XgxMPhUGa7kO'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Login>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<Photographer>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api',
+              '/v1/curated',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Login.fromJson(_result.data!);
+    final value = Photographer.fromJson(_result.data!);
     return value;
   }
 

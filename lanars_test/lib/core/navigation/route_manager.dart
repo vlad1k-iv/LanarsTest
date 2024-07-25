@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lanars_test/core/di/di.dart';
 import 'package:lanars_test/domain/bloc/login_cubit/login_cubit.dart';
+import 'package:lanars_test/domain/bloc/main_page_cubit/main_page_cubit.dart';
 import 'package:lanars_test/presentation/login/login_view.dart';
 import 'package:lanars_test/presentation/main_page/main_page.dart';
 
@@ -24,7 +25,10 @@ class RouteGenerator {
         );
       case Routes.mainPageRoute:
         return MaterialPageRoute<MainPage>(
-          builder: (_) => const MainPage(),
+          builder: (_) => BlocProvider<MainPageCubit>(
+            create: (context) => locator.get<MainPageCubit>(),
+            child: const MainPage(),
+          ),
         );
       default:
         return unDefinedRoute();
