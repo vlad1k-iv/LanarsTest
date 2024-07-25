@@ -14,41 +14,38 @@ class AlphabetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (photos.isNotEmpty) {
-      return SizedBox(
-        width: context.screenWidth - 32,
-        child: Scrollbar(
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: photos.length,
-            itemBuilder: (context, index) {
-              final item = photos[index];
-              return Row(
-                children: [
-                  _buildListItem(
-                    item,
-                    context,
+    return SizedBox(
+      width: context.screenWidth - 32,
+      child: ListView.builder(
+        key: const ValueKey('builder'),
+        itemCount: photos.isNotEmpty ? photos.length : 1,
+        itemBuilder: (context, index) {
+          if (photos.isEmpty) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64),
+                child: Text(
+                  'No item found',
+                  style: TextStyles.titleMedium.apply(
+                    color: context.colors.secondary,
                   ),
-                ],
-              );
-            },
-          ),
-        ),
-      );
-    } else {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 64),
-          child: Text(
-            'No item found',
-            style: TextStyles.titleMedium.apply(
-              color: context.colors.secondary,
-            ),
-          ),
-        ),
-      );
-    }
+                ),
+              ),
+            );
+          } else {
+            final item = photos[index];
+            return Row(
+              children: [
+                _buildListItem(
+                  item,
+                  context,
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
   }
 
   Widget _buildListItem(
@@ -87,10 +84,12 @@ class AlphabetList extends StatelessWidget {
               width: context.screenWidth - 105,
               height: 100,
               child: ListTile(
+                key: ValueKey(model.image),
                 contentPadding: const EdgeInsets.all(16),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: AppRemoteImage(
+                  child:
+                   AppRemoteImage(
                     url: model.image,
                     width: 56,
                     height: 56,

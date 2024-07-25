@@ -34,9 +34,14 @@ class AppRemoteImage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (url.isNotEmpty) {
       return CachedNetworkImage(
+        key: key,
         imageUrl: url,
         width: width,
         height: height,
+        memCacheWidth: 45,
+        memCacheHeight: 60,
+        maxHeightDiskCache: 60,
+        maxWidthDiskCache: 45,
         fit: fit,
         matchTextDirection: matchTextDirection,
         color: color,
@@ -49,11 +54,16 @@ class AppRemoteImage extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        placeholder: (_, url) =>
-            placeholder ??
-            CircularProgressIndicator(
+        progressIndicatorBuilder: (context, url, progress) {
+          return Padding(
+            padding: const EdgeInsets.all(7),
+            child: CircularProgressIndicator(
+              value: progress.progress,
               color: context.colors.primary,
+              strokeWidth: 3,
             ),
+          );
+        },
       );
     } else {
       /// TODO use the default value
