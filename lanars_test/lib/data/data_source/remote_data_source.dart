@@ -8,12 +8,10 @@ abstract class RemoteDataSource {
 
 @Injectable(as: RemoteDataSource)
 class RemoteDataSourceImpl extends RemoteDataSource {
-  final AppServiceClient _appServiceClient;
-
-  RemoteDataSourceImpl(this._appServiceClient);
+  final _client = initClient();
 
   @override
   Future<Login> login() {
-    return _appServiceClient.getUserFeedByGroup();
+    return _client.getUserFeedByGroup();
   }
 }
