@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lanars_test/core/extensions.dart';
+import 'package:lanars_test/domain/model/models.dart';
 import 'package:lanars_test/presentation/resources/assets_manager.dart';
 import 'package:lanars_test/presentation/resources/text_styles.dart';
 import 'package:lanars_test/presentation/widgets/app_remote_image.dart';
 
 class SideMenuView extends StatefulWidget {
-  const SideMenuView({super.key});
+  const SideMenuView({
+    required this.userMode,
+    super.key,
+  });
+
+  final UserModel? userMode;
 
   @override
   State<SideMenuView> createState() => _SideMenuViewState();
@@ -42,19 +48,19 @@ class _SideMenuViewState extends State<SideMenuView> {
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: AppRemoteImage(
-                    url: 'https://via.placeholder.com/40',
+                    url: widget.userMode?.avatar ?? '',
                     width: 56,
                     height: 56,
                   ),
                 ),
                 title: Text(
-                  'User name',
+                  widget.userMode?.userNmae ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyles.bodyMedium,
                 ),
                 subtitle: Text(
-                  'example@email.com',
+                  widget.userMode?.email ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,

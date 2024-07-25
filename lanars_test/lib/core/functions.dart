@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lanars_test/core/extensions.dart';
+import 'package:lanars_test/presentation/resources/text_styles.dart';
 
 void unFocus(BuildContext context) {
   if (FocusScope.of(context).hasFocus) {
@@ -26,4 +28,35 @@ bool isPasswordValid(String password) {
   bool hasDigit = password.contains(RegExp(r'\d'));
 
   return hasUppercase && hasLowercase && hasDigit;
+}
+
+void showScaffoldSnackBar({
+  required BuildContext context,
+  required String error,
+}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              error,
+              style: TextStyles.bodySmall.apply(
+                color: context.colors.onInverseSurface,
+              ),
+            ),
+            InkWell(
+              borderRadius: BorderRadius.circular(100),
+              onTap: () {
+                ScaffoldMessenger.of(context).clearSnackBars();
+              },
+              child: Icon(
+                Icons.close,
+                color: context.colors.onInverseSurface,
+              ),
+            ),
+          ],
+        )),
+  );
 }

@@ -58,6 +58,7 @@ class _LoginViewState extends State<LoginView> {
                                 isError: state.email.isNotEmpty &&
                                     !isEmalValid(state.email),
                                 label: 'Email',
+                                error: 'Email is incorrect',
                                 hintText: 'Enter your email',
                               ),
                             ),
@@ -70,6 +71,7 @@ class _LoginViewState extends State<LoginView> {
                                 obscureText: true,
                                 isError: state.password.isNotEmpty &&
                                     !isPasswordValid(state.password),
+                                error: 'Password is incorrect',
                                 onChange: cubit.emitPassword,
                                 label: 'Password',
                                 hintText: 'Enter your password',

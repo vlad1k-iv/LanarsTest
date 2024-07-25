@@ -32,27 +32,39 @@ class AppRemoteImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      width: width,
-      height: height,
-      fit: fit,
-      matchTextDirection: matchTextDirection,
-      color: color,
-      filterQuality: filterQuality,
-      colorBlendMode: colorBlendMode,
-      errorWidget: (cont, error, _) => Container(
-        color: Colors.grey,
+    if (url.isNotEmpty) {
+      return CachedNetworkImage(
+        imageUrl: url,
+        width: width,
+        height: height,
+        fit: fit,
+        matchTextDirection: matchTextDirection,
+        color: color,
+        filterQuality: filterQuality,
+        colorBlendMode: colorBlendMode,
+        errorWidget: (cont, error, _) => Container(
+          color: Colors.grey,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.grey,
+          ),
+        ),
+        placeholder: (_, url) =>
+            placeholder ??
+            CircularProgressIndicator(
+              color: context.colors.primary,
+            ),
+      );
+    } else {
+      /// TODO use the default value
+      return Container(
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.grey,
+          color: context.colors.primary,
         ),
-      ),
-      placeholder: (_, url) =>
-          placeholder ??
-          CircularProgressIndicator(
-            color: context.colors.primary,
-          ),
-    );
+      );
+    }
   }
 }
