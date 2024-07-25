@@ -17,7 +17,7 @@ class AlphabetList extends StatelessWidget {
     return SizedBox(
       width: context.screenWidth - 32,
       child: ListView.builder(
-        key: ValueKey('qwe'),
+        key: const ValueKey('builder'),
         itemCount: photos.isNotEmpty ? photos.length : 1,
         itemBuilder: (context, index) {
           if (photos.isEmpty) {
