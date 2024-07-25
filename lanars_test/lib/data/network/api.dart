@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:lanars_test/core/constants.dart';
+import 'package:lanars_test/core/di/di.dart';
+import 'package:lanars_test/data/network/client.dart';
 import 'package:lanars_test/data/responses/login_response.dart';
 import 'package:retrofit/http.dart';
 
@@ -11,4 +13,12 @@ abstract class AppServiceClient {
 
   @GET('/api')
   Future<Login> getUserFeedByGroup();
+}
+
+AppServiceClient initClient() {
+  final dio = locator.get<DioFactory>().getDio();
+
+  return AppServiceClient(
+    dio,
+  );
 }

@@ -10,6 +10,7 @@ class BaseTextField extends StatelessWidget {
     this.error,
     this.hintText,
     this.label,
+    this.obscureText = false,
     super.key,
   });
   final TextEditingController? controller;
@@ -18,6 +19,7 @@ class BaseTextField extends StatelessWidget {
   final String? error;
   final String? label;
   final String? hintText;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class BaseTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
+            obscureText: obscureText,
             controller: controller,
             onChanged: onChange,
             cursorColor: context.colors.primary,
